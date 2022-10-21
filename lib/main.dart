@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:my_flutter/learnwidget/check_box_widget.dart';
+import 'package:my_flutter/learnwidget/progress_widget.dart';
 
 void main() {
   runApp(const MyApp());
@@ -50,7 +50,12 @@ class _MyHomePageState extends State<MyHomePage> {
       // body: const TextTest(),
       // body: const ButtonTest(),
       // body: const ImageTest(),
-      body: const TestCheckBox(),
+      // body: const TestCheckBox(),
+      // body: const TextFieldTest(),
+      // body: const FocusTestRoute(),
+      // body: const FormTestRoute(),
+      // body: const TestProgress(),
+      body: const ProgressRoute(),
     );
   }
 }
