@@ -57,6 +57,8 @@ Flutter布局
 
 BoxConstraints 是盒模型布局过程中父渲染对象传递给子渲染对象的约束信息，包含最大宽高信息，子组件大小需要在约束的范围内
 ConstrainedBox用于对子组件添加额外的约束
+    有多重限制时，对于minWidth和minHeight来说，是取父子中相应数值较大的。实际上，只有这样才能保证父限制与子限制不冲突。
+    对于maxWidth和maxHeight来说，内层控件的大小只跟自己最近的那个父控件的限制有关。
 SizedBox用于给子元素指定固定的宽高
 UnconstrainedBox 虽然在其子组件布局时可以取消约束（子组件可以为无限大），
                    但是 UnconstrainedBox 自身是受其父组件约束的，所以当 UnconstrainedBox 随着其子组件变大后，如果UnconstrainedBox 的大小超过它父组件约束时，也会导致溢出报错
