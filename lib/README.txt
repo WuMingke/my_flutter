@@ -63,9 +63,10 @@ SizedBox用于给子元素指定固定的宽高
 UnconstrainedBox 虽然在其子组件布局时可以取消约束（子组件可以为无限大），
                    但是 UnconstrainedBox 自身是受其父组件约束的，所以当 UnconstrainedBox 随着其子组件变大后，如果UnconstrainedBox 的大小超过它父组件约束时，也会导致溢出报错
 
-Flex 弹性布局
-Wrap Flow 流式布局
-Stack Positioned 层叠布局
+Flex 弹性布局 和Expanded组件配合实现弹性布局
+Wrap Flow 流式布局  Flow比较难
+
+Stack Positioned 层叠布局 实现绝对定位
 Align 调整一个子元素在父元素中的位置
 
 注意，如果我们需要自定义布局策略，一般首选的方式是通过直接继承RenderObject，然后通过重写 performLayout 的方式实现
