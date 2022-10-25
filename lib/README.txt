@@ -84,9 +84,12 @@ Flutter 的build 和 layout 是可以交错执行的，并不是严格的按照�
 Padding 边距
 DecoratedBox 背景、边框、渐变等
 Transform 可以在其子组件绘制时对其应用一些矩阵变换来实现一些特效
+    Transform 的变换是应用在绘制阶段，而并不是应用在布局(layout)阶段，
+                所以无论对子组件应用何种变化，其占用空间的大小和在屏幕上的位置都是固定不变的，因为这些是在布局阶段就确定的。
+    RotatedBox 和 Transform.rotate 功能相似，但是它的变换是在layout阶段，会影响在子组件的位置和大小
 Container
 Clip 裁剪  CustomClipper 自定义裁剪
-FittedBox 空间适配
+FittedBox 空间适配，适配原理：
         FittedBox 在布局子组件时会忽略其父组件传递的约束，可以允许子组件无限大，即FittedBox 传递给子组件的约束为（0<=width<=double.infinity, 0<= height <=double.infinity）。
         FittedBox 对子组件布局结束后就可以获得子组件真实的大小。
         FittedBox 知道子组件的真实大小也知道他父组件的约束，那么FittedBox 就可以通过指定的适配方式（BoxFit 枚举中指定），让起子组件在 FittedBox 父组件的约束范围内按照指定的方式显示。
@@ -94,15 +97,17 @@ Scaffold 页面骨架
 
 可滚动组件：
 Flutter 中的可滚动主要由三个角色组成：Scrollable、Viewport 和 Sliver：
-Scrollable ：用于处理滑动手势，确定滑动偏移，滑动偏移变化时构建 Viewport 。
-Viewport：显示的视窗，即列表的可视区域；
-Sliver：视窗里显示的元素。
+    Scrollable ：用于处理滑动手势，确定滑动偏移，滑动偏移变化时构建 Viewport 。
+    Viewport：显示的视窗，即列表的可视区域；
+    Sliver：视窗里显示的元素。
 具体布局过程：
-Scrollable 监听到用户滑动行为后，根据最新的滑动偏移构建 Viewport 。
-Viewport 将当前视口信息和配置信息通过 SliverConstraints 传递给 Sliver。
-Sliver 中对子组件（RenderBox）按需进行构建和布局，然后确认自身的位置、绘制等信息，保存在 geometry 中（一个 SliverGeometry 类型的对象）。
+    Scrollable 监听到用户滑动行为后，根据最新的滑动偏移构建 Viewport 。
+    Viewport 将当前视口信息和配置信息通过 SliverConstraints 传递给 Sliver。
+    Sliver 中对子组件（RenderBox）按需进行构建和布局，然后确认自身的位置、绘制等信息，
+            保存在 geometry 中（一个 SliverGeometry 类型的对象）。
 
 可滚动组件中有很多都支持基于Sliver的按需加载模型，如ListView、GridView，但是也有不支持该模型的，如SingleChildScrollView
+所以SingleChildScrollView最好在内容不会超过屏幕太多时使用
 
 ListView 原理
 ListView 内部组合了 Scrollable、Viewport 和 Sliver，需要注意：
