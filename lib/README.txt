@@ -113,7 +113,27 @@ ListView 原理
 ListView 内部组合了 Scrollable、Viewport 和 Sliver，需要注意：
 ListView 中的列表项组件都是 RenderBox，并不是 Sliver， 这个一定要注意。
 一个 ListView 中只有一个Sliver，对列表项进行按需加载的逻辑是 Sliver 中实现的。
-ListView 的 Sliver 默认是 SliverList，如果指定了 itemExtent ，则会使用 SliverFixedExtentList；如果 prototypeItem 属性不为空，则会使用 SliverPrototypeExtentList，无论是是哪个，都实现了子组件的按需加载模型。
+ListView 的 Sliver 默认是 SliverList，如果指定了 itemExtent ，则会使用 SliverFixedExtentList；(优先使用)
+如果 prototypeItem 属性不为空，则会使用 SliverPrototypeExtentList，（优先使用）无论是是哪个，都实现了子组件的按需加载模型。
+
+Flutter 中手势的冲突时，默认的策略是子元素生效
+如果 CustomScrollView 有孩子也是一个完整的可滚动组件且它们的滑动方向一致，则 CustomScrollView 不能正常工作
+CustomScrollView 组合 Sliver 的原理是为所有子 Sliver 提供一个共享的 Scrollable，然后统一处理指定滑动方向的滑动事件
+
+滚动监听
+    Flutter Widget树中子Widget可以通过发送通知（Notification）与父(包括祖先)Widget通信。
+    父级组件可以通过NotificationListener组件来监听自己关注的通知
+    可滚动组件在滚动时会发送ScrollNotification类型的通知，ScrollBar正是通过监听滚动通知来实现的。
+    通过NotificationListener监听滚动事件和通过ScrollController有两个主要的不同：
+    通过NotificationListener可以在从可滚动组件到widget树根之间任意位置都能监听。
+    而ScrollController只能和具体的可滚动组件关联后才可以。
+    收到滚动事件后获得的信息不同；NotificationListener在收到滚动事件时，
+    通知中会携带当前滚动位置和ViewPort的一些信息，而ScrollController只能获取当前滚动位置。
+
+Sliver 的布局协议如下：
+    Viewport 将当前布局和配置信息通过 SliverConstraints 传递给 Sliver。
+    Sliver 确定自身的位置、绘制等信息，保存在 geometry 中（一个 SliverGeometry 类型的对象）。
+    Viewport 读取 geometry 中的信息来对 Sliver 进行布局和绘制。
 
 AnimatedList 有动画的ListView
 
@@ -128,8 +148,22 @@ CustomScrollView
 
 自定义 Sliver
 
+Sliver布局模型和盒布局模型
+两者布局流程基本相同：父组件告诉子组件约束信息 > 子组件根据父组件的约束确定自生大小 > 父组件获得子组件大小调整其位置。不同是：
+    父组件传递给子组件的约束信息不同。盒模型传递的是 BoxConstraints，而 Sliver 传递的是 SliverConstraints。
+    描述子组件布局信息的对象不同。盒模型的布局信息通过 Size 和 offset描述 ，而 Sliver的是通过 SliverGeometry 描述。
+    布局的起点不同。Sliver布局的起点一般是Viewport ，而盒模型布局的起点可以是任意的组件。
 
-NestedScrollView
+// TODO: 2022/10/26 mingKE  NestedScrollView 学习
+NestedScrollView？
+
+WillPopScope 返回键拦截
+
+
+
+
+
+
 
 Image 缓存？
 动态化？马甲包？
