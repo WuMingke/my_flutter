@@ -159,6 +159,61 @@ NestedScrollView？
 
 WillPopScope 返回键拦截
 
+数据共享  InheritedWidget  重要！！！
+状态管理的一般原则是：
+如果状态是组件私有的，则应该由组件自己管理；如果状态要跨组件共享，则该状态应该由各个组件共同的父元素来管理。
+
+按需rebuild：ValueListenableBuilder
+    组件和数据流向无关，可以实现任意流向的数据共享。
+    实践中，ValueListenableBuilder 的拆分粒度应该尽可能细，可以提高性能。
+
+异步UI更新（FutureBuilder、StreamBuilder）
+
+手势事件
+当指针按下时，Flutter会对应用程序执行命中测试(Hit Test)，以确定指针与屏幕接触的位置存在哪些组件（widget），
+指针按下事件（以及该指针的后续事件）然后被分发到由命中测试发现的最内部的组件，然后从那里开始，
+事件会在组件树中向上冒泡，这些事件会从最内部的组件被分发到组件树根的路径上的所有组件。
+
+忽略指针事件：
+    AbsorbPointer：本身会参与命中测试，自己可以响应事件，但是子控件不行
+    IgnorePointer：本身不会参与命中测试
+
+手势识别：
+    GestureDetector：
+    GestureRecognizer：
+
+解决手势冲突：2个方法：
+    1、使用 Listener。这相当于跳出了手势识别那套规则。
+    2、自定义手势手势识别器（ Recognizer）。
+
+Flutter事件机制：
+    Flutter 事件处理流程主要分两步，为了聚焦核心流程，我们以用户触摸事件为例来说明：
+    1、命中测试：当手指按下时，触发 PointerDownEvent 事件，按照深度优先遍历当前渲染（render object）树，
+    对每一个渲染对象进行“命中测试”（hit test），如果命中测试通过，则该渲染对象会被添加到一个 HitTestResult 列表当中。
+    2、事件分发：命中测试完毕后，会遍历 HitTestResult 列表，调用每一个渲染对象的事件处理方法（handleEvent）
+    来处理 PointerDownEvent 事件，该过程称为“事件分发”（event dispatch）。随后当手指移动时，便会分发 PointerMoveEvent 事件。
+    3、事件清理：当手指抬（ PointerUpEvent ）起或事件取消时（PointerCancelEvent），会先对相应的事件进行分发，
+    分发完毕后会清空 HitTestResult 列表。
+
+    需要注意：
+    1、命中测试是在 PointerDownEvent 事件触发时进行的，一个完成的事件流是 down > move > up (cancel)。
+    2、如果父子组件都监听了同一个事件，则子组件会比父组件先响应事件。这是因为命中测试过程是按照深度优先规则遍历的，
+    所以子渲染对象会比父渲染对象先加入 HitTestResult 列表，又因为在事件分发时是从前到后遍历 HitTestResult 列表的，
+    所以子组件比父组件会更先被调用 handleEvent 。
+
+通知 Notification
+
+动画：Animation、Curve、Controller、Tween
+
+自定义组件：3种方式
+    1、组合其他组件
+    2、自绘
+    3、实现RenderObject
+
+
+
+
+
 
 
 

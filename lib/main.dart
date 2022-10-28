@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'learnwidget/function_widget.dart';
+import 'learnwidget/gesture_widget.dart';
 
 void main() {
   runApp(const MyApp());
@@ -64,7 +64,14 @@ class _MyHomePageState extends State<MyHomePage> {
       // body: const ContainerTest2(),
       // body: const ContainerTest3(),
       // body: const ScrollWidgetTest(),
-      body: const TestWillPop(),
+      // body: const TestWillPop(),
+      // body: const InheritedWidgetTestRoute(),
+      // body: const TestFuture(),
+      // body: const TestStream(),
+      // body: const TestDialog(),
+      // body: const TestGesture(),
+      // body: const TestGesture2(),
+      body: const Drag(),
     );
   }
 }
