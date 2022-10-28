@@ -210,13 +210,8 @@ Flutter事件机制：
     2、自绘
     3、实现RenderObject
 
-
-
-
-
-
-
-
+原理：// TODO: 2022/10/28 mingKE 还没看
+https://book.flutterchina.club/chapter14/
 
 
 
