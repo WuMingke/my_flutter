@@ -1,13 +1,19 @@
 import 'package:flutter/material.dart';
 
+import 'learncanvas/canvas1.dart';
 import 'learnwidget/gesture_widget.dart';
 
 void main() {
-  runApp(const MyApp());
+  // runApp(const LearnWidget());
+  // WidgetsFlutterBinding.ensureInitialized(); // 确定初始化
+  // SystemChrome.setPreferredOrientations(// 使设备横屏显示
+  //     [DeviceOrientation.landscapeLeft, DeviceOrientation.landscapeRight]);
+  // SystemChrome.setEnabledSystemUIOverlays([]); // 全屏显示
+  runApp(const LearnCanvas());
 }
 
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+class LearnWidget extends StatelessWidget {
+  const LearnWidget({super.key});
 
   @override
   Widget build(BuildContext context) {
