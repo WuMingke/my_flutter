@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:my_flutter/learncanvas/canvas2.dart';
 
-import 'learncanvas/canvas1.dart';
 import 'learnwidget/gesture_widget.dart';
 
 void main() {
@@ -9,7 +9,8 @@ void main() {
   // SystemChrome.setPreferredOrientations(// 使设备横屏显示
   //     [DeviceOrientation.landscapeLeft, DeviceOrientation.landscapeRight]);
   // SystemChrome.setEnabledSystemUIOverlays([]); // 全屏显示
-  runApp(const LearnCanvas());
+  // runApp(const LearnCanvas());
+  runApp(const LearnCanvas2());
 }
 
 class LearnWidget extends StatelessWidget {
