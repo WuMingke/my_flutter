@@ -44,3 +44,14 @@ class SimpleFutureBuilder extends StatelessWidget {
     );
   }
 }
+
+class TestWidget extends StatelessWidget {
+  final int count = 0;
+
+  const TestWidget({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container();
+  }
+}

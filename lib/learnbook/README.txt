@@ -51,3 +51,51 @@ SafeArea控件：使用MediaQueryData，留出padding的距离
 
 懒加载：FutureBuilder、StreamBuilder
 
+不应该在StatelessWidget内声明非final的成员变量
+
+Widget和Element是多对一的关系
+Element和RenderObject是一对一的关系
+
+Element在初始化时将Widget实例作为参数传入，所以Element在创建时就持有了Widget对象，而后Element对象在被mount后，
+会调用Widget的createRenderObject方法，创建出对应的RenderObject
+
+Widget作为配置文件描述如何渲染界面，多个Widget会组合成Widget Tree；
+Element表示Widget Tree中特定位置的实例，多个Element在mount之后，会构成一棵Element Tree；
+Element只有在mount之后才算激活，激活之后如果Element存在RenderObject，Element会通过Widget的createRenderObject
+    方法创建出对应的RenderObject，并与Element一一绑定
+
+MVP ？
+widget renderObject element
+
+RenderObject
+    真正的绘制实例，实际控件中一般不会直接使用，大部分情况下，会是其子类RenderBox、RenderSliver
+
+一般情况下，RenderBox的performLayout流程可以理解为向下输入Constraints，然后向上返回了Size
+
+Layer
+    RenderObject和Layer之间是多对一的关系，但是并非所有的RenderObject都有Layer，这
+        受到isRepaintBoundary和alwaysNeedsCompositing的影响
+
+StatelessWidget和StatefulWidget的Element都是ComponentElement，并且都不具备RenderObject
+
+生命周期对比
+                    Widget              Element                  State
+parent Element   createElement       new Element              createState
+inflate Widget                      _state.element = this
+                                    _state.widget = widget
+
+                                         mount               initState、didChangeDependencies
+
+                                    markNeedsBuild              setState
+
+                                    rebuild                     didUpdateWidget
+
+                                    unmount                     dispose
+
+_state.element = this
+_state.widget = widget
+State初始化时会持有Element和Widget，而Element又是BuildContext，所以通过State可以获取他们
+
+
+
+
