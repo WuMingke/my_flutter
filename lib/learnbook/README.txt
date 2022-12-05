@@ -1,0 +1,53 @@
+const 用于表示编译时常量，static const 表示静态常量
+final 运行时才能确定值
+
+var与dynamic
+    Dart属于强类型语言，但可以使用var声明变量，Dart对于var声明会自推导出数据类型。实际上var是编译期的语法糖，
+    而dynamic声明才表示动态类型，dynamic被编译后是一个object类型，在编译期间不对任何的类型进行检查，而是在运行时对类型进行检查。
+
+方法参数可以不声明类型
+    void getDao(name, id, {branch = "213"}) {}
+
+方法可以作为另一个方法的参数
+
+如果类实现了call()方法，则该类的对象可以作为方法使用
+
+mixins混入
+    混入时的基础顺序是从右到左依次执行，而且和super方法是否执行有关
+    当多种关键字同时实现时，顺序是 extends mixins implements
+
+构造方法
+    默认构造只能有一个，其余的定义通过 "类型.xxx()"模式实现
+
+Isolate
+    Dart在单线程模式中增加了Isolate提供跨线程的真异步操作。
+    Dart中线程不共享内存，所以也不存在死锁，从而也导致了Isolate之间的数据只能通过port的端口方式发送接口，所以Isolate也称为隔离的执行
+
+Zone
+    Dart可通过Zone表示指定的代码执行环境：  runZoned(() => null)
+
+异步
+    async/await
+    Future
+    Stream （async*/yield）
+
+路由跳转
+    命名路由跳转：
+    直接使用Route跳转：
+
+Key
+    Key可用于控制控件如何替代渲染树中的另一个控件。一个Widget的runtimeType和Key结合，可以用于这个Widget的基本标识。
+    比如控制更新：
+      static bool canUpdate(Widget oldWidget, Widget newWidget) {
+        return oldWidget.runtimeType == newWidget.runtimeType
+            && oldWidget.key == newWidget.key;
+      }
+    所以如果具备相同的Key，那么这个Widget就可能被Element复用。
+    通过Key可以获取到Widget，从而获取到BuildContext，从而获取到对应的RenderBox，从而可以获取到Widget的大小位置等。
+
+    常见的Key：ValueKey、ObjectKey、UniqueKey、PageStorageKey
+
+SafeArea控件：使用MediaQueryData，留出padding的距离
+
+懒加载：FutureBuilder、StreamBuilder
+
