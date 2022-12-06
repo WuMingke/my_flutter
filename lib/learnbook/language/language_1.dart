@@ -54,6 +54,9 @@ class B extends Base {
     }
     print("B.c()");
     super.c();
+
+    var m = ModelA("", "");
+    m.id;
   }
 }
 
@@ -62,6 +65,14 @@ class B extends Base {
 class ModelA {
   String name = "";
   String tag = "";
+
+  // String _id = "2";
+
+  int get id => 0;
+
+  // set id(String value) {
+  //   _id = value;
+  // }
 
   ModelA(this.name, this.tag);
 

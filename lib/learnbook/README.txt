@@ -96,6 +96,14 @@ _state.element = this
 _state.widget = widget
 State初始化时会持有Element和Widget，而Element又是BuildContext，所以通过State可以获取他们
 
+ViewPort
+    提供可滑动窗口，RenderSliver对应的Sliver相关控件需要在ViewPort下使用
 
+InheritedWidget 共享状态
+    每个Element的内部都有一个Map<Type, InheritedElement>? _inheritedWidgets;成员变量，当本身或者父控件是InheritedWidget时
+    会初始化，当父控件是InheritedWidget时，这个Map会在Element中被一级一级往下传递与合并
+
+ErrorWidget
+    红色的错误界面，可以自定义
 
 
