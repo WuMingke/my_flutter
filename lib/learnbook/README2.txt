@@ -33,6 +33,9 @@
         1、最后得到直接胜利的控件
         2、活到最后的控件中排在列表第一位的控件
 
+    // TODO: 2022/12/6 mingKE 私有属性？？？
+
+
 状态管理
     1、State + InheritedWidget：通过State保存数据和管理状态，通过InheritedWidget实现数据共享
         State支持跨帧保存信息，所以Widget可以实现跨帧的状态恢复。当执行setState方式时，Sate内部会通过调用markNeedsBuild方法，
@@ -41,10 +44,22 @@
     2、Stream
         首先需要创建StreamController对象，然后通过它获取StreamSink对象用于事件入口，再通过它获取Stream对象用于监听数据变化，
         最后通过Stream的listen监听得到StreamSubscription对象用于管理事件订阅，并且在不需要时结束订阅。
-    3、
+        StreamController：用于控制整个Stream的过程，提供各类接口用于创建各种事件流
+        StreamSink：一般作为事件的入口，提供如add、addStream等方法
+        Stream：事件源本身，一般可用于监听事件流或者对事件进行转换，如listen、where等
+        StreamSubscription：事件订阅后得到的对象，表面上用于管理订阅过的各类操作，如cancel、pause等，同时
+                            在事件流的内部也是事件中转的关键
+
+    3、RxDart：对Stream的封装
+    4、BLoC设计模式
+    5、scoped_model：利用Flutter控件的某些特性，notifyListeners()
+    6、flutter_redux：对Stream、InheritedWidget的封装，单向数据流
+    7、Provider：
+
+混合开发
 
 
-    // TODO: 2022/12/6 mingKE 私有属性？？？
+
 
 
 

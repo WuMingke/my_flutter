@@ -29,7 +29,7 @@ Zone
 异步
     async/await
     Future
-    Stream （async*/yield）
+    Stream （async*/yield），可以指定同步、异步运行模式
 
 路由跳转
     命名路由跳转：
