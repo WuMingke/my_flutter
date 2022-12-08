@@ -57,6 +57,17 @@
     7、Provider：
 
 混合开发
+    Flutter提供Flutter Plugin用于支持在Flutter在集成原生平台功能，需要添加依赖
+    与原生通信：
+    1、BasicMessageChannel：传递字符串和半结构化的信息
+    2、MethodChannel：传递方法调用
+    3、EventChannel：传递数据流
+
+    Flutter集成原生：
+        Plugin
+        PlatformView
+    原生集成flutter：
+        flutter_boost：混合堆栈管理
 
 
 
