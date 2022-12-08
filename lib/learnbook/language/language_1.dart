@@ -1,8 +1,13 @@
+import 'package:my_flutter/learnbook/language/aa.dart';
+
 void main() {
   // var g = G();
   // g.a();
   // g.b();
   // g.c();
+
+  var ab = AB("1");
+  // ab._name; 私有属性跨文件才有效
 }
 
 abstract class Base {
