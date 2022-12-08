@@ -19,6 +19,7 @@ void main() {
     print(obj);
     print(trace);
   });
+  // window.onReportTimings;
 }
 
 class FlutterReduxApp extends StatelessWidget {
@@ -43,11 +44,14 @@ class A {
   int getId() => this._id;
 }
 
+var d = 0;
+
 class B {
   var a = A();
 
   void b() {
     a.getId();
     a._id;
+    d;
   }
 }
