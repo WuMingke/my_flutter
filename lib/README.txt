@@ -13,6 +13,7 @@ State 中有两个常用属性：
 
 
 生命周期：
+createState()->
 initState   当 widget 第一次插入到 widget 树时会被调用，对于每一个State对象，
             Flutter 框架只会调用一次该回调，所以，通常在该回调中做一些一次性的操作，如状态初始化、订阅子树的事件通知等
 didChangeDependencies()     当State对象的依赖发生变化时会被调用
@@ -27,6 +28,8 @@ didUpdateWidget()   在 widget 重新构建时，Flutter 框架会调用widget.c
                     中同一位置的新旧节点，然后决定是否需要更新，如果widget.canUpdate返回true则会调用此回调
 deactivate()    当 State 对象从树中被移除时，会调用此回调。如果移除后没有重新插入到树中则紧接着会调用dispose()方法
 dispose()   当 State 对象从树中被永久移除时调用；通常在此回调中释放资源
+
+Flutter应用的生命周期
 
 状态管理：
     Widget 管理自己的状态。

@@ -7,6 +7,7 @@ final 运行时才能确定值
 var与dynamic
     Dart属于强类型语言，但可以使用var声明变量，Dart对于var声明会自推导出数据类型。实际上var是编译期的语法糖，
     而dynamic声明才表示动态类型，dynamic被编译后是一个object类型，在编译期间不对任何的类型进行检查，而是在运行时对类型进行检查。
+Object与dynamic：最大区别在于Object有静态类型检查
 
 方法参数可以不声明类型
     void getDao(name, id, {branch = "213"}) {}
@@ -18,6 +19,8 @@ var与dynamic
 mixins混入
     混入时的基础顺序是从右到左依次执行，而且和super方法是否执行有关
     当多种关键字同时实现时，顺序是 extends mixins implements
+    mixins是要通过非继承的方式来复用类中的代码；
+    可以把自己的方法提供给其他类使用，但却不需要成为其他类的父类.
 
 构造方法
     默认构造只能有一个，其余的定义通过 "类型.xxx()"模式实现
@@ -35,8 +38,9 @@ Zone
     Stream （async*/yield），可以指定同步、异步运行模式
 
 路由跳转
-    命名路由跳转：
-    直接使用Route跳转：
+    命名路由跳转：Navigator.pushNamed(context,routeName)
+    直接使用Route跳转：Navigator.push(context,MaterialPageRoute(builder:(context)=>pageWidget))
+    返回上一级：Navigator.pop()
 
 Key
     Key可用于控制控件如何替代渲染树中的另一个控件。一个Widget的runtimeType和Key结合，可以用于这个Widget的基本标识。
