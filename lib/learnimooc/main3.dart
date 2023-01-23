@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:my_flutter/learnimooc/photo_app.dart';
+
+import 'animation_learn_hero.dart';
 
 void main() {
   runApp(const Main());
@@ -21,7 +22,7 @@ class Main extends StatelessWidget {
             child: const Icon(Icons.arrow_back),
           ),
         ),
-        body: const PhotoApp(),
+        body: const HeroAnimation(),
       ),
     );
   }
