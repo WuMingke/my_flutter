@@ -55,6 +55,7 @@
     5、scoped_model：利用Flutter控件的某些特性，notifyListeners()
     6、flutter_redux：对Stream、InheritedWidget的封装，单向数据流
     7、Provider：
+    ValueNotifier？？？
 
 混合开发
     Flutter提供Flutter Plugin用于支持在Flutter在集成原生平台功能，需要添加依赖
