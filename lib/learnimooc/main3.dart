@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'animation_learn_hero.dart';
+import 'list_test.dart';
 
 void main() {
   runApp(const Main());
@@ -22,7 +22,7 @@ class Main extends StatelessWidget {
             child: const Icon(Icons.arrow_back),
           ),
         ),
-        body: const HeroAnimation(),
+        body: const GridViewTest(),
       ),
     );
   }
