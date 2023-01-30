@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_swiper/flutter_swiper.dart';
+import 'package:my_flutter/learnimooc/app/dao/home_dao.dart';
+import 'package:my_flutter/learnimooc/app/model/common_model.dart';
+import 'package:my_flutter/learnimooc/app/model/home_model.dart';
+import 'package:my_flutter/learnimooc/app/widget/grid_nav.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -16,10 +20,18 @@ class _HomePageState extends State<HomePage> {
   ];
   double _appbarAlpha = 0;
   final APPBAR_SCROLL_OFFSET = 100;
+  List<CommonModel> localNavList = [];
+
+  @override
+  void initState() {
+    super.initState();
+    _loadData();
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: const Color(0xfff2f2f2),
       body: Stack(
         children: [
           MediaQuery.removePadding(
@@ -50,11 +62,9 @@ class _HomePageState extends State<HomePage> {
                           },
                         ),
                       ),
-                      const SizedBox(
-                        height: 800,
-                        child: ListTile(
-                          title: Text("111"),
-                        ),
+                      Padding(
+                        padding: const EdgeInsets.fromLTRB(7, 4, 7, 4),
+                        child: GridNav(localNavList: localNavList),
                       ),
                     ],
                   ))),
@@ -86,5 +96,33 @@ class _HomePageState extends State<HomePage> {
     setState(() {
       _appbarAlpha = alpha;
     });
+  }
+
+  // 第一种方式
+  void _loadData() {
+    HomeDao.fetch().then((result) {
+      setState(() {
+        localNavList = result.localNavList;
+      });
+    }).onError((error, stackTrace) {
+      // setState(() {
+      //   // resultString = error.toString();
+      // });
+      showAboutDialog(context: context, applicationName: error.toString());
+    });
+  }
+
+  // 第二种方式
+  void _loadData2() async {
+    try {
+      HomeModel homeModel = await HomeDao.fetch();
+      setState(() {
+        // resultString = homeModel.config.searchUrl; //这里就需要分别去取了
+      });
+    } catch (e) {
+      setState(() {
+        // resultString = e.toString();
+      });
+    }
   }
 }
