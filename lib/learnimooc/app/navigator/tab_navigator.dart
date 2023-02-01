@@ -3,6 +3,7 @@ import 'package:my_flutter/learnimooc/app/pages/home_page.dart';
 import 'package:my_flutter/learnimooc/app/pages/my_page.dart';
 import 'package:my_flutter/learnimooc/app/pages/search_page.dart';
 import 'package:my_flutter/learnimooc/app/pages/travel_page.dart';
+import 'package:my_flutter/learnimooc/extensions.dart';
 
 class TabNavigator extends StatefulWidget {
   const TabNavigator({Key? key}) : super(key: key);
@@ -22,6 +23,13 @@ class _TabNavigatorState extends State<TabNavigator> {
     return Scaffold(
       body: PageView(
         controller: _controller,
+        onPageChanged: (index) {
+          if (index != 0) {
+            changeStatusBarColor(Colors.blueAccent, Brightness.light);
+          } else {
+            changeStatusBarColor(Colors.transparent, Brightness.light);
+          }
+        },
         children: const [
           HomePage(),
           SearchPage(),

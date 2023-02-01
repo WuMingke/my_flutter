@@ -12,6 +12,8 @@ import 'package:my_flutter/learnimooc/app/widget/sales_box.dart';
 import 'package:my_flutter/learnimooc/app/widget/sub_nav.dart';
 import 'package:my_flutter/learnimooc/app/widget/web_view.dart';
 
+import '../widget/search_bar.dart';
+
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
 
@@ -19,7 +21,9 @@ class HomePage extends StatefulWidget {
   State<HomePage> createState() => _HomePageState();
 }
 
-class _HomePageState extends State<HomePage> {
+// 继承自 AutomaticKeepAliveClientMixin 和重写 wantKeepAlive 方法
+// 避免翻页时重置页面  进而重复进行网络请求等
+class _HomePageState extends State<HomePage> with AutomaticKeepAliveClientMixin {
   double _appbarAlpha = 0;
   final APPBAR_SCROLL_OFFSET = 100;
   List<CommonModel> localNavList = [];
@@ -37,6 +41,7 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
+    super.build(context);
     return Scaffold(
       backgroundColor: const Color(0xfff2f2f2),
       body: LoadingContainer(
@@ -62,7 +67,7 @@ class _HomePageState extends State<HomePage> {
                     child: ListView(
                       children: [
                         SizedBox(
-                          height: 160,
+                          height: 200,
                           child: Swiper(
                             itemCount: bannerList.length,
                             autoplay: true,
@@ -111,15 +116,35 @@ class _HomePageState extends State<HomePage> {
             ),
             Opacity(
               opacity: _appbarAlpha,
-              child: Container(
-                height: 80,
-                decoration: const BoxDecoration(color: Colors.white),
-                child: const Center(
-                  child: Padding(
-                    padding: EdgeInsets.only(top: 20),
-                    child: Text("首页"),
+              child: Column(
+                children: [
+                  Container(
+                    decoration: const BoxDecoration(
+                      gradient:
+                          LinearGradient(colors: [Color(0x66000000), Colors.transparent], begin: Alignment.topCenter, end: Alignment.bottomCenter),
+                    ),
+                    child: Container(
+                      padding: const EdgeInsets.only(top: 24),
+                      height: 80,
+                      decoration: BoxDecoration(color: Color.fromARGB((_appbarAlpha * 255).toInt(), 255, 255, 255)),
+                      child: SearchBar(
+                        enabled: true,
+                        hideLeft: false,
+                        searchBarType: _appbarAlpha > 0.2 ? SearchBarType.homeLight : SearchBarType.home,
+                        hint: "",
+                        defaultText: "网红打卡地 景点 酒店 美食",
+                        leftBtnClick: () {},
+                        rightBtnClick: () {},
+                        speakClick: _jumpToSpeak,
+                        inputBoxClick: _jumpToSearch,
+                      ),
+                    ),
                   ),
-                ),
+                  Container(
+                    height: _appbarAlpha > 0.2 ? 0.5 : 0,
+                    decoration: const BoxDecoration(boxShadow: [BoxShadow(color: Colors.black12, blurRadius: 0.5)]),
+                  )
+                ],
               ),
             )
           ],
@@ -127,6 +152,10 @@ class _HomePageState extends State<HomePage> {
       ),
     );
   }
+
+  _jumpToSearch() {}
+
+  _jumpToSpeak() {}
 
   void _onScroll(double pixels) {
     double alpha = pixels / APPBAR_SCROLL_OFFSET;
@@ -174,4 +203,17 @@ class _HomePageState extends State<HomePage> {
       });
     }
   }
+
+  @override
+  void dispose() {
+    super.dispose();
+
+    // keep = false;
+    // updateKeepAlive();
+  }
+
+  @override
+  bool get wantKeepAlive => true;
+  // TODO: 2023/2/1 mingKE 这里不能单纯地返回ture，因为会让它持续保留在内存里不被释放
+// TODO: 需要用一个变量配合updateKeepAlive()使用。
 }

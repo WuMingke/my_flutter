@@ -1,20 +1,13 @@
-import 'dart:io';
-
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:my_flutter/learnimooc/app/navigator/tab_navigator.dart';
+
+import '../extensions.dart';
 
 void main() {
   runApp(const Main());
 
   // 全局状态栏透明
-  if (Platform.isAndroid) {
-    const systemUiOverlayStyle = SystemUiOverlayStyle(
-      statusBarColor: Colors.transparent,
-      statusBarIconBrightness: Brightness.light,
-    );
-    SystemChrome.setSystemUIOverlayStyle(systemUiOverlayStyle);
-  }
+  changeStatusBarColor(Colors.transparent, Brightness.light);
 }
 
 class Main extends StatelessWidget {
