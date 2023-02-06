@@ -64,3 +64,26 @@ eg：MyHttpTest
 
 // TODO: 2023/2/2 mingKE 看 RawScrollbar ？？
 // TODO: RawScrollbar 是一个教科书级别的组件源码，其中包含了 通知监听 、画板绘制、计时器操作、动画操作等 Flutter 开发中必备的技能点。
+
+flutter run --no-sound-null-safety
+
+启动白屏？
+    Flutter应用在启动的时候，首先会初始化sdk，然后将flutter代码加入到内存中进行渲染，在这个过程中，是没有内容显示的，所以显示白屏
+    flutter_splash_screen: ^1.0.0+6
+    Android、iOS需要分别设置
+
+流畅度优化：
+按需创建页面
+按需AutomaticKeepAliveClientMixin
+耗时操作放在独立的isolate
+
+内存优化：
+图片优化，根据控件大小加载指定分辨率的图片
+列表优化，分页加载、使用listView.build()复用子控件
+防止内存泄漏，dispose需要销毁listener等
+
+更新flutter sdk 和 packages：flutter upgrade
+只更新包：flutter packages upgrade
+         flutter packages get
+
+

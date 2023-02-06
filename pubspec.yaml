@@ -43,6 +43,7 @@ dependencies:
   http: ^0.13.5
   shared_preferences: ^2.0.17
   flutter_webview_plugin: ^0.4.0
+  flutter_splash_screen: ^1.0.0+6
 
 dev_dependencies:
   flutter_test:
@@ -69,6 +70,7 @@ flutter:
   # To add assets to your application, add an assets section, like this:
   assets:
     - images/head.jpg
+    - lib/learnimooc/app/images/
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware

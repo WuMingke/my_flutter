@@ -25,7 +25,7 @@ class _TabNavigatorState extends State<TabNavigator> {
         controller: _controller,
         onPageChanged: (index) {
           if (index != 0) {
-            changeStatusBarColor(Colors.blueAccent, Brightness.light);
+            changeStatusBarColor(Colors.transparent, Brightness.dark);
           } else {
             changeStatusBarColor(Colors.transparent, Brightness.light);
           }

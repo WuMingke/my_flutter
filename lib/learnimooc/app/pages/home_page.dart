@@ -5,12 +5,14 @@ import 'package:my_flutter/learnimooc/app/model/common_model.dart';
 import 'package:my_flutter/learnimooc/app/model/grid_nav_model.dart';
 import 'package:my_flutter/learnimooc/app/model/home_model.dart';
 import 'package:my_flutter/learnimooc/app/model/sales_box_model.dart';
+import 'package:my_flutter/learnimooc/app/pages/search_page.dart';
 import 'package:my_flutter/learnimooc/app/widget/grid_nav.dart';
 import 'package:my_flutter/learnimooc/app/widget/grid_nav_center.dart';
 import 'package:my_flutter/learnimooc/app/widget/loading_container.dart';
 import 'package:my_flutter/learnimooc/app/widget/sales_box.dart';
 import 'package:my_flutter/learnimooc/app/widget/sub_nav.dart';
 import 'package:my_flutter/learnimooc/app/widget/web_view.dart';
+import 'package:my_flutter/learnimooc/extensions.dart';
 
 import '../widget/search_bar.dart';
 
@@ -153,7 +155,14 @@ class _HomePageState extends State<HomePage> with AutomaticKeepAliveClientMixin 
     );
   }
 
-  _jumpToSearch() {}
+  _jumpToSearch() {
+    Navigator.push(context, MaterialPageRoute(builder: (context) {
+      changeStatusBarColor(Colors.transparent, Brightness.dark);
+      return const SearchPage(
+        hideLeft: false,
+      );
+    }));
+  }
 
   _jumpToSpeak() {}
 
