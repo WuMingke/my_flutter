@@ -44,7 +44,8 @@ dependencies:
   shared_preferences: ^2.0.17
   flutter_webview_plugin: ^0.4.0
   flutter_splash_screen: ^1.0.0+6
-
+  dio: ^4.0.6
+  
 dev_dependencies:
   flutter_test:
     sdk: flutter
