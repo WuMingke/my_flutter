@@ -4,7 +4,7 @@ import 'package:my_flutter/learnimooc2/navigator/test/my_detail_page.dart';
 import '../test/my_home_page.dart';
 
 /// 用来判断 onPause onResume
-typedef RouteChangeListener = void Function(RouteStatusInfo current, RouteStatusInfo pre);
+typedef RouteChangeListener = void Function(RouteStatusInfo current, RouteStatusInfo? pre);
 
 /// 创建页面
 pageWrap(Widget child) {
@@ -60,8 +60,8 @@ class MyNavigator extends _RouteJumpListener {
   }
 
   RouteJumpListener? _jumpListener;
-  List<RouteChangeListener> _listeners = [];
-  RouteStatusInfo _current;
+  final List<RouteChangeListener> _listeners = [];
+  RouteStatusInfo? _current;
 
   /// 注册路由跳转逻辑
   void registerRouteJump(RouteJumpListener listener) {
