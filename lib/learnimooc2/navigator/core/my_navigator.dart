@@ -3,6 +3,9 @@ import 'package:my_flutter/learnimooc2/navigator/test/my_detail_page.dart';
 
 import '../test/my_home_page.dart';
 
+/// 用来判断 onPause onResume
+typedef RouteChangeListener = void Function(RouteStatusInfo current, RouteStatusInfo pre);
+
 /// 创建页面
 pageWrap(Widget child) {
   return MaterialPage(
@@ -48,17 +51,48 @@ class RouteStatusInfo {
 /// 感知当前页面是否压后台
 class MyNavigator extends _RouteJumpListener {
   MyNavigator._();
+
   static MyNavigator? _instance;
+
   static MyNavigator getInstance() {
     _instance ??= MyNavigator._();
     return _instance!;
   }
 
   RouteJumpListener? _jumpListener;
+  List<RouteChangeListener> _listeners = [];
+  RouteStatusInfo _current;
 
   /// 注册路由跳转逻辑
   void registerRouteJump(RouteJumpListener listener) {
     _jumpListener = listener;
+  }
+
+  /// 监听路由跳转逻辑
+  void addListener(RouteChangeListener listener) {
+    if (!_listeners.contains(listener)) {
+      _listeners.add(listener);
+    }
+  }
+
+  void removeListener(RouteChangeListener listener) {
+    _listeners.remove(listener);
+  }
+
+  /// 通知路由页面变化
+  void notify(List<MaterialPage> currentPages, List<MaterialPage> prePages) {
+    if (currentPages == prePages) {
+      return;
+    }
+    var current = RouteStatusInfo(getRouteStatus(currentPages.last), currentPages.last.child);
+    _notify(current);
+  }
+
+  void _notify(RouteStatusInfo current) {
+    for (var listener in _listeners) {
+      listener(current, _current);
+    }
+    _current = current;
   }
 
   @override

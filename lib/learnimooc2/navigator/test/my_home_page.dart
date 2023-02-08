@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:my_flutter/learnimooc2/navigator/core/my_navigator.dart';
 
 import 'video_model.dart';
 
@@ -12,6 +13,30 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+  var listener;
+
+  @override
+  void initState() {
+    super.initState();
+    listener = (RouteStatusInfo current, RouteStatusInfo? pre) {
+      print("--current:${current.page}");
+      print("--current:${pre?.page}");
+
+      if (widget == current.page || current.page is MyHomePage) {
+        print("打开了首页，onResume");
+      } else if (widget == pre?.page || pre?.page is MyHomePage) {
+        print("onPause");
+      }
+    };
+    MyNavigator.getInstance().addListener(listener);
+  }
+
+  @override
+  void dispose() {
+    MyNavigator.getInstance().removeListener(listener);
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(

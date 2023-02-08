@@ -108,6 +108,10 @@ class MyRouteDelegate extends RouterDelegate<MyRoutePath> with ChangeNotifier, P
 
     // 重新创建一个数组，否则pages因引用没有改变路由不会生效
     tempPages = [...tempPages, page];
+
+    // 通知路由发生变化
+    MyNavigator.getInstance().notify(tempPages, pages);
+
     pages = tempPages;
     // 构建路由栈
     // pages = [
@@ -121,6 +125,7 @@ class MyRouteDelegate extends RouterDelegate<MyRoutePath> with ChangeNotifier, P
     //   ),
     //   if (videoModel != null) pageWrap(MyDetailPage(videoModel: videoModel!)),
     // ];
+
     return WillPopScope(
       onWillPop: () async {
         // 修复Android物理返回键，无法返回上一页的问题
@@ -134,6 +139,11 @@ class MyRouteDelegate extends RouterDelegate<MyRoutePath> with ChangeNotifier, P
           if (!route.didPop(result)) {
             return false;
           }
+
+          var tempPages = [...pages];
+          pages.removeLast();
+          // 通知路由变化
+          MyNavigator.getInstance().notify(pages, tempPages);
           return true;
         },
       ),
