@@ -231,6 +231,20 @@ Image 缓存？
 
 
 
+Flutter 图片加载与缓存原理
+1 是谁加载了图片
+2 图片是如何加载的
+3 图片是如何解码的
+4 图片是如何缓存的
+5 图片缓存的key是怎么生成的
+6 如何设置缓存大小
+
+列表图片优化：
+    内存缓存
+    本地缓存：cached_network_image插件
+
+    默认1000张、100M、LRU
+    PaintingBinding.instance.imageCache.maximumSize
 
 
 
