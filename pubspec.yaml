@@ -45,7 +45,8 @@ dependencies:
   flutter_webview_plugin: ^0.4.0
   flutter_splash_screen: ^1.0.0+6
   dio: ^4.0.6
-  
+  flutter_bloc: ^8.1.2
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
