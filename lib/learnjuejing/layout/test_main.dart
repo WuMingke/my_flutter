@@ -13,9 +13,36 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       home: Scaffold(
         appBar: AppBar(),
-        body: const MyRenderBox(
-          FlutterLogo(
-            size: 200,
+        body: Container(
+          color: Colors.redAccent,
+          child: SizedBox(
+            width: 100,
+            child: Container(
+              height: 30,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(12),
+                color: Colors.white30,
+                border: Border.all(
+                  color: Colors.white,
+                ),
+              ),
+              child: GestureDetector(
+                onTap: () {},
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: const [
+                    Icon(Icons.refresh),
+                    Padding(
+                      padding: EdgeInsets.only(bottom: 2),
+                      child: Text(
+                        '换一批',
+                        style: TextStyle(color: Colors.white),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ),
           ),
         ),
       ),
