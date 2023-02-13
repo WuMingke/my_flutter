@@ -42,4 +42,10 @@ Stack:
 那么它的大小就是无限大（因为这样才有意义啊，才能让Position发挥作用）。如果Position不传位置约束的话，就会被当作
 无位置的组件处理。
 
-Container 的尺寸：一般情况：有child就匹配尺寸，没有child就越大越好
+Container 的尺寸：一般情况：
+    有child就匹配尺寸,除非有对齐的情况
+    没有child就越大越好,除非约束没有边界
+
+CustomMultiChildLayout
+
+自定义RenderObject
