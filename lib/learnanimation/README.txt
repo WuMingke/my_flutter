@@ -43,11 +43,14 @@
     两个builder里面的widget参数：优化作用，减少不必要的widget重建。把不需要重建的widget放到外面，builder里面传的这个widget就是外面的那个widget
 
 原理：
-    implicit_animations.dart
+    隐式动画：implicit_animations.dart   ImplicitlyAnimatedWidget
+    显式动画：transitions.dart   AnimatedWidget
         A number of implicitly animated widgets ship with the framework.
     AnimatedXXX -> 创建 AnimatedWidgetBaseState -> 监听 addListener -> 调用 setState(() { });
     XXXTransition -> AnimatedWidget -> 监听 listenable.addListener -> 调用 setState(() { });
     特别的：FadeTransition 没找到流程，但是最后还是调用了 setState(() { });
+
+
 
 
 其它：
