@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 void main() {
   runApp(
-    MaterialApp(
+    const MaterialApp(
       home: LoopLayout(),
     ),
   );
@@ -15,14 +15,14 @@ class LoopLayout extends StatelessWidget {
   Widget build(BuildContext context) {
     return Row(
       children: [
-        SizedBox(
+        const SizedBox(
           width: 50,
           height: 50,
           child: ColoredBox(
             color: Colors.blue,
           ),
         ),
-        Expanded(
+        const Expanded(
             child: ColoredBox(
           color: Colors.blue,
         )),

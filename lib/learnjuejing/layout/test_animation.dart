@@ -19,7 +19,7 @@ class _MyAppState extends State<MyApp> {
     return MaterialApp(
       home: Scaffold(
         appBar: AppBar(),
-        // body: const MyAnimation2(),
+        // body: RotatePage(),
         body: const MyAnimation(),
       ),
     );
@@ -37,8 +37,9 @@ class _MyAnimationState extends State<MyAnimation> with TickerProviderStateMixin
   late AnimationController _sizeController;
   late AnimationController _opacityController;
   late AnimationController _locationController;
-  late Animation<Offset> animation;
   bool reverse = false;
+  double x = 0;
+  double y = 0;
 
   @override
   void initState() {
@@ -52,28 +53,37 @@ class _MyAnimationState extends State<MyAnimation> with TickerProviderStateMixin
 
     _opacityController = AnimationController(
       vsync: this,
-      duration: const Duration(seconds: 2),
-      lowerBound: 0.2,
+      duration: const Duration(seconds: 5),
+      lowerBound: 0.0,
       upperBound: 1.0,
     );
 
     _locationController = AnimationController(
       vsync: this,
-      duration: const Duration(seconds: 12),
-    )..addStatusListener((status) {
+      duration: const Duration(seconds: 10),
+    )
+      ..addStatusListener((status) {
         if (status == AnimationStatus.completed) {
-          print("-----------");
+          _opacityController.reset();
+          _opacityController.forward();
+          _sizeController.reset();
+          _sizeController.forward();
+          _locationController.reset();
+          _locationController.forward();
+        }
+      })
+      ..addListener(() {
+        if (mounted) {
+          final t = _locationController.value;
           setState(() {
-            reverse != reverse;
-            _locationController.forward();
+            x = quadraticBezierTo(t, _width / 2, _control.dx, halfSpace());
+            y = quadraticBezierTo(t, _width / 2, _control.dy, halfSpace());
           });
         }
       });
-    animation = Tween(
-      begin: const Offset(0.0, 0.0),
-      end: const Offset(1.0, 1.0),
-    ).animate(_locationController);
   }
+
+  final _control = const Offset(50, 150);
 
   @override
   void dispose() {
@@ -83,8 +93,13 @@ class _MyAnimationState extends State<MyAnimation> with TickerProviderStateMixin
     super.dispose();
   }
 
+  final double _itemWidth = 10;
+  double _width = 0;
+
   @override
   Widget build(BuildContext context) {
+    _width = MediaQuery.of(context).size.width;
+
     return AnimatedBuilder(
       animation: _sizeController,
       builder: (BuildContext context, Widget? child) {
@@ -94,82 +109,145 @@ class _MyAnimationState extends State<MyAnimation> with TickerProviderStateMixin
             _opacityController.forward();
             _locationController.forward();
           },
-          child: SlideTransition(
-            position: animation,
-            child: Opacity(
-              opacity: reverse ? 1 - _opacityController.value : _opacityController.value,
-              child: SizedBox(
-                width: _sizeController.value * 200,
-                height: _sizeController.value * 200,
-                child: const ColoredBox(color: Colors.red),
-              ),
+          child: Container(
+            color: Colors.green,
+            width: _width,
+            height: _width,
+            child: Stack(
+              alignment: Alignment.center,
+              children: [
+                /* 以下是定位 */
+                /***
+                 *   1    2
+                 * 3   0    4
+                 *   5    6
+                 */
+                Positioned(
+                  //0
+                  child: buildSizedBox(),
+                ),
+                Positioned(
+                  //1
+                  top: halfSpace(),
+                  left: halfSpace(),
+                  child: buildSizedBox(),
+                ),
+                Positioned(
+                  //2
+                  top: halfSpace(),
+                  right: halfSpace(),
+                  child: buildSizedBox(),
+                ),
+                Positioned(
+                  //3
+                  top: space(),
+                  left: 10,
+                  child: buildSizedBox(),
+                ),
+                Positioned(
+                  //4
+                  top: space(),
+                  right: 10,
+                  child: buildSizedBox(),
+                ),
+                Positioned(
+                  //5
+                  bottom: halfSpace(),
+                  left: halfSpace(),
+                  child: buildSizedBox(),
+                ),
+                Positioned(
+                  //5
+                  bottom: halfSpace(),
+                  right: halfSpace(),
+                  child: buildSizedBox(),
+                ),
+
+                // 控制点
+                Positioned(
+                  left: _control.dx,
+                  top: _control.dy,
+                  child: SizedBox(
+                    height: _itemWidth,
+                    width: _itemWidth,
+                    child: const ColoredBox(color: Colors.yellow),
+                  ),
+                ),
+                // 路径
+                CustomPaint(
+                  painter: PathPainter(_width / 2, _control.dx, _control.dy, halfSpace()),
+                  size: Size(_width, _width),
+                ),
+
+                /* 动画 */
+                Positioned(
+                  // top: _locationController.value * 50,
+                  // left: _locationController.value * 50,
+                  top: y,
+                  left: x,
+                  child: Opacity(
+                    opacity: reverse ? 1 - _opacityController.value : _opacityController.value,
+                    child: SizedBox(
+                      width: _sizeController.value * 4 * _itemWidth,
+                      height: _sizeController.value * 4 * _itemWidth,
+                      child: const ColoredBox(color: Colors.black),
+                    ),
+                  ),
+                ),
+              ],
             ),
           ),
         );
       },
     );
   }
-}
 
-class BobbleBean {
-  // 位置
-  Offset position;
-
-  // 运动的速度
-  double speed;
-
-  // 运动角度
-  double theta;
-
-  // 半径
-  double radius;
-
-  BobbleBean(this.position, this.speed, this.theta, this.radius);
-}
-
-class MyAnimation2 extends StatefulWidget {
-  const MyAnimation2({Key? key}) : super(key: key);
-
-  @override
-  State<MyAnimation2> createState() => _MyAnimation2State();
-}
-
-class _MyAnimation2State extends State<MyAnimation2> {
-  final List<BobbleBean> _list = [];
-  final Random _random = Random(DateTime.now().microsecondsSinceEpoch);
-
-  final double _maxTheta = 2 * pi;
-
-  @override
-  void initState() {
-    super.initState();
-
-    for (int i = 0; i < 10; i++) {
-      final b = BobbleBean(
-        const Offset(-1, -1),
-        _random.nextDouble() * 0.1,
-        _random.nextDouble() * _maxTheta,
-        _random.nextDouble() * 100,
-      );
-      _list.add(b);
-    }
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      color: Colors.blueAccent,
-      child: Stack(
-        children: [
-          ..._buildBobble(context),
-        ],
-      ),
+  SizedBox buildSizedBox() {
+    return SizedBox(
+      width: _itemWidth,
+      height: _itemWidth,
+      child: const ColoredBox(color: Colors.red),
     );
   }
 
-  List<Widget> _buildBobble(BuildContext context) {
-    List<Widget> result = [];
+  double space() => _width / 2 - _itemWidth / 2;
+  double halfSpace() => (space() - _itemWidth) / 2;
 
-    return result;
+  // 二阶贝塞尔曲线
+  double quadraticBezierTo(double t, double start, double control, double end) {
+    return pow(1 - t, 2) * start + 2 * t * (1 - t) * control + pow(t, 2) * end;
+  }
+
+  double x0() {
+    return (_width / 2 + space() / 2) / 2;
+  }
+}
+
+class PathPainter extends CustomPainter {
+  final double start;
+  final double cx;
+  final double cy;
+  final double end;
+
+  final Paint mPaint = Paint()
+    ..isAntiAlias = true
+    ..strokeWidth = 3
+    ..style = PaintingStyle.stroke
+    ..color = Colors.black26;
+
+  final Path path = Path();
+
+  PathPainter(this.start, this.cx, this.cy, this.end);
+
+  @override
+  void paint(Canvas canvas, Size size) {
+    path.moveTo(start, start);
+    path.quadraticBezierTo(cx, cy, end, end);
+    canvas.drawPath(path, mPaint);
+  }
+
+  @override
+  bool shouldRepaint(covariant CustomPainter oldDelegate) {
+    return true;
   }
 }
