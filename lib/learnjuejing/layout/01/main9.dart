@@ -10,6 +10,13 @@ void main() {
             color: Colors.blue,
             width: 100000,
             height: 100,
+            child: const SizedBox(
+              width: 80,
+              height: 80,
+              child: ColoredBox(
+                color: Colors.redAccent,
+              ),
+            ),
           ),
         ],
       ),

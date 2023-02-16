@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 void main() {
   runApp(CustomSingleChildLayout(
     delegate: MyLayout(),
-    child: const ColoredBox(color: Colors.blue),
+    child: const ColoredBox(color: Colors.blueAccent),
   ));
 }
 

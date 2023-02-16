@@ -2,9 +2,7 @@ import 'package:flutter/material.dart';
 
 void main() {
   runApp(
-    const MaterialApp(
-      home: LoopLayout(),
-    ),
+    LoopLayout(),
   );
 }
 
@@ -14,6 +12,7 @@ class LoopLayout extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Row(
+      textDirection: TextDirection.ltr,
       children: [
         const SizedBox(
           width: 50,
@@ -23,12 +22,26 @@ class LoopLayout extends StatelessWidget {
           ),
         ),
         const Expanded(
-            child: ColoredBox(
-          color: Colors.blue,
-        )),
+            flex: 1,
+            child: SizedBox(
+              height: 10,
+              child: ColoredBox(
+                color: Colors.white,
+              ),
+            )),
+        const Expanded(
+            flex: 2,
+            child: SizedBox(
+              height: 10,
+              child: ColoredBox(
+                color: Colors.green,
+              ),
+            )),
         Container(
           height: 10,
-        )
+          width: 10,
+          color: Colors.redAccent,
+        ),
       ],
     );
   }
