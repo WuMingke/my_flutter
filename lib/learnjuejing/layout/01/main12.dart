@@ -6,9 +6,9 @@ void main() {
       home: Stack(
         children: [
           Positioned(
-              top: 200,
+              top: 100,
               left: 200,
-              child: Builder(builder: (context) {
+              child: Builder(builder: (BuildContext context) {
                 return GestureDetector(
                   onTap: () {
                     RenderObject? r = context.findRenderObject();

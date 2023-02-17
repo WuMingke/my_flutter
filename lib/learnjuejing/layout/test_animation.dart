@@ -121,7 +121,9 @@ class _MyAnimationState extends State<MyAnimation> with TickerProviderStateMixin
                  *   1    2
                  * 3   0    4
                  *   5    6
+                 *
                  */
+
                 Positioned(
                   //0
                   child: buildSizedBox(),
