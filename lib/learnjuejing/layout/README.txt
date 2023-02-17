@@ -5,6 +5,10 @@
     向下传递约束，向上传递尺寸：widget树只需要遍历一遍
 
 
+
+    http://doc.oa.com/web/#/57/10511
+
+
 布局：
     大小 Size
     约束 Constraints
@@ -58,9 +62,10 @@ Stack:
 那么它的大小就是无限大（因为这样才有意义啊，才能让Position发挥作用）。如果Position不传位置约束的话，就会被当作
 无位置的组件处理。
 
-Container 的尺寸：一般情况：
-    有child就匹配尺寸,除非有对齐的情况
-    没有child就越大越好,除非约束没有边界
+Container 的尺寸：一般情况： eg:main13
+    不设置宽高的情况下
+    有child就匹配尺寸,除非有对齐的情况,
+    没有child就越大越好,除非约束没有边界，
 
 自定义RenderObject
 
