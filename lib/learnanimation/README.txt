@@ -7,7 +7,7 @@
    需要控制的     (手动控制)显式动画 需要用到动画控制器、还需要回收它： XXXTransition
                 自定义显式动画： AnimatedBuilder
 
-隐式动画：
+隐式动画： 核心就是更改属性，进行重建
 1 AnimatedContainer
 2 AnimatedSwitcher 不同控件之间的转换；同控件内容改变->key
 3 AnimatedOpacity
