@@ -3,7 +3,7 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 
 class RotatePage extends StatefulWidget {
-  RotatePage({Key? key}) : super(key: key);
+  const RotatePage({Key? key}) : super(key: key);
 
   @override
   _RotatePageState createState() => _RotatePageState();
@@ -23,7 +23,7 @@ class _RotatePageState extends State<RotatePage> with TickerProviderStateMixin {
   }
 
   addRightAnimation() {
-    _rightController = AnimationController(duration: Duration(seconds: 5), vsync: this);
+    _rightController = AnimationController(duration: const Duration(seconds: 5), vsync: this);
     var x0Right = heartWidth / 2;
     var y0Right = heartHeight / 4;
 
