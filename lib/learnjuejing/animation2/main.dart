@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:my_flutter/learnjuejing/animation2/animation6.dart';
+import 'package:my_flutter/learnjuejing/animation2/animation9.dart';
 
 void main() {
   runApp(const MyHome());
@@ -15,7 +15,7 @@ class MyHome extends StatelessWidget {
         appBar: AppBar(
           title: const Text("123"),
         ),
-        body: const Animation6(),
+        body: const Animation9(),
       ),
     );
   }
