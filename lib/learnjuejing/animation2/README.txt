@@ -43,6 +43,19 @@ TweenSequence 分段动画
 这个api什么意思
 final result = Path.combine(PathOperation.difference, circlePath, circlePath2);
 
+动画框架
+    Animation<T>
+    Curve
+    Animatable<T>
+
+Animation<T>:产生动画的数据源,使T类型的对象拥有数值变化的特性，AnimationController驱使数值变化【装饰着模式】
+Curve、Animatable<T> 做数值变换
+
+Animatable<T> 将double数值变成某个类型，从而达到数字与对象间的对应关系【适配器模式】
+
+Curve 将 double 数值转换成 double 数值
+
+
 
 
 
