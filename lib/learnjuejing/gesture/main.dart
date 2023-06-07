@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:my_flutter/learnjuejing/gesture/gesture2.dart';
+import 'package:my_flutter/learnjuejing/gesture/gesture5.dart';
 
 void main() {
   runApp(const MyHome());
@@ -15,7 +15,7 @@ class MyHome extends StatelessWidget {
         appBar: AppBar(
           title: const Text("123"),
         ),
-        body: const Gesture2(),
+        body: const Gesture5(),
       ),
     );
   }
