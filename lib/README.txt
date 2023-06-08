@@ -101,13 +101,16 @@ Scaffold 页面骨架
 可滚动组件：
 Flutter 中的可滚动主要由三个角色组成：Scrollable、Viewport 和 Sliver：
     Scrollable ：用于处理滑动手势，确定滑动偏移，滑动偏移变化时构建 Viewport 。
-    Viewport：显示的视窗，即列表的可视区域；
-    Sliver：视窗里显示的元素。
+    Viewport：显示的视窗，即列表的可视区域；默认缓存250逻辑像素
+    Sliver：视窗里显示的元素。Sliver 并不是 ListView 里的一个个条目组件，而是 ListView 的整个内容主体.
+    整个滑动的流程就是 Scrollable 组件将偏移量交给 Viewport 组件， Viewport 组件根据自己的 尺寸 和 偏移量 ，来显示 slivers 的部分内容
 具体布局过程：
     Scrollable 监听到用户滑动行为后，根据最新的滑动偏移构建 Viewport 。
     Viewport 将当前视口信息和配置信息通过 SliverConstraints 传递给 Sliver。
     Sliver 中对子组件（RenderBox）按需进行构建和布局，然后确认自身的位置、绘制等信息，
             保存在 geometry 中（一个 SliverGeometry 类型的对象）。
+
+模板方法模式：定义一个操作中的算法骨架，而将算法的一些步骤延迟到子类中，使得子类可以不改变该算法结构的情况下重定义该算法的某些特定步骤
 
 可滚动组件中有很多都支持基于Sliver的按需加载模型，如ListView、GridView，但是也有不支持该模型的，如SingleChildScrollView
 所以SingleChildScrollView最好在内容不会超过屏幕太多时使用
