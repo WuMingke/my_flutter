@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:my_flutter/learnjuejing/gesture/gesture5.dart';
+import 'package:my_flutter/learnjuejing/scroll/scroll3.dart';
 
 void main() {
   runApp(const MyHome());
@@ -15,10 +15,8 @@ class MyHome extends StatelessWidget {
         appBar: AppBar(
           title: const Text("123"),
         ),
-        body: const Gesture5(),
+        body: Scroll3(),
       ),
     );
   }
-
-// TODO: 2023/6/8 mingKE 手势竞技场还没看懂。
 }

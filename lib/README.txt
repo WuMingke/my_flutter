@@ -54,6 +54,9 @@ Flutter布局
 下层组件确定自己的大小，然后告诉上层组件。注意下层组件的大小必须符合父组件的约束。
 上层组件确定下层组件相对于自身的偏移和确定自身的大小（大多数情况下会根据子组件的大小来确定自身的大小）。
 
+return _show ? const FlutterLogo() :const SizedBox(); // 实现控件隐藏，类似于返回空字符串 “”
+
+
 盒模型布局组件有两个特点：
 组件对应的渲染对象都继承自 RenderBox 类。
 在布局过程中父级传递给子级的约束信息由 BoxConstraints 描述。
@@ -62,15 +65,15 @@ BoxConstraints 是盒模型布局过程中父渲染对象传递给子渲染对�
 ConstrainedBox用于对子组件添加额外的约束
     有多重限制时，对于minWidth和minHeight来说，是取父子中相应数值较大的。实际上，只有这样才能保证父限制与子限制不冲突。
     对于maxWidth和maxHeight来说，内层控件的大小只跟自己最近的那个父控件的限制有关。
-SizedBox用于给子元素指定固定的宽高
+SizedBox用于给子元素指定固定的宽高，"尺寸无法违背父级约束"，
 UnconstrainedBox 虽然在其子组件布局时可以取消约束（子组件可以为无限大），
                    但是 UnconstrainedBox 自身是受其父组件约束的，所以当 UnconstrainedBox 随着其子组件变大后，如果UnconstrainedBox 的大小超过它父组件约束时，也会导致溢出报错
 
 Flex 弹性布局 和Expanded组件配合实现弹性布局
 Wrap Flow 流式布局  Flow比较难
 
-Stack Positioned 层叠布局 实现绝对定位
-Align 调整一个子元素在父元素中的位置
+Stack Positioned 层叠布局 实现绝对定位 Stack自身尺寸变大只是子组件变大后的一个副作用
+Align 调整一个子元素在父元素中的位置，可以使子组件溢出
 
 注意，如果我们需要自定义布局策略，一般首选的方式是通过直接继承RenderObject，然后通过重写 performLayout 的方式实现
 
@@ -101,13 +104,16 @@ Scaffold 页面骨架
 可滚动组件：
 Flutter 中的可滚动主要由三个角色组成：Scrollable、Viewport 和 Sliver：
     Scrollable ：用于处理滑动手势，确定滑动偏移，滑动偏移变化时构建 Viewport 。
-    Viewport：显示的视窗，即列表的可视区域；
-    Sliver：视窗里显示的元素。
+    Viewport：显示的视窗，即列表的可视区域；默认缓存250逻辑像素
+    Sliver：视窗里显示的元素。Sliver 并不是 ListView 里的一个个条目组件，而是 ListView 的整个内容主体.
+    整个滑动的流程就是 Scrollable 组件将偏移量交给 Viewport 组件， Viewport 组件根据自己的 尺寸 和 偏移量 ，来显示 slivers 的部分内容
 具体布局过程：
     Scrollable 监听到用户滑动行为后，根据最新的滑动偏移构建 Viewport 。
     Viewport 将当前视口信息和配置信息通过 SliverConstraints 传递给 Sliver。
     Sliver 中对子组件（RenderBox）按需进行构建和布局，然后确认自身的位置、绘制等信息，
             保存在 geometry 中（一个 SliverGeometry 类型的对象）。
+
+模板方法模式：定义一个操作中的算法骨架，而将算法的一些步骤延迟到子类中，使得子类可以不改变该算法结构的情况下重定义该算法的某些特定步骤
 
 可滚动组件中有很多都支持基于Sliver的按需加载模型，如ListView、GridView，但是也有不支持该模型的，如SingleChildScrollView
 所以SingleChildScrollView最好在内容不会超过屏幕太多时使用
