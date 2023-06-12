@@ -124,6 +124,7 @@ ListView 中的列表项组件都是 RenderBox，并不是 Sliver， 这个一�
 一个 ListView 中只有一个Sliver，对列表项进行按需加载的逻辑是 Sliver 中实现的。
 ListView 的 Sliver 默认是 SliverList，如果指定了 itemExtent ，则会使用 SliverFixedExtentList；(优先使用)
 如果 prototypeItem 属性不为空，则会使用 SliverPrototypeExtentList，（优先使用）无论是是哪个，都实现了子组件的按需加载模型。
+  shrinkWrap: true,  属性会立刻加载所有元素，所以消耗资源
 
 Flutter 中手势的冲突时，默认的策略是子元素生效
 如果 CustomScrollView 有孩子也是一个完整的可滚动组件且它们的滑动方向一致，则 CustomScrollView 不能正常工作
