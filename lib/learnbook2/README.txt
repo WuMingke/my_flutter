@@ -1,1 +1,6 @@
 FittedBox   自动缩小尺寸
+
+设置了Key之后，寻找对应关系时Flutter不但会检查组件在树中的位置和类型是否相同，还需要再检查Key值是否相等。
+只有满足了这3个条件之后，State才会与新的Widget建立对应关系。
+
+InheritedWidget向下传递数据 Notification向上冒泡事件

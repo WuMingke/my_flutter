@@ -1,10 +1,35 @@
+import 'dart:async';
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
+void main() {
+  runApp(const MyApp());
+}
+
+class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      home: Scaffold(
+        appBar: AppBar(),
+        body: MyHttpTest(),
+      ),
+    );
+  }
+}
+
+class Fun {
+  int fun1(int num) {
+    return num + 1;
+  }
+}
+
 class MyHttpTest extends StatefulWidget {
-  const MyHttpTest({Key? key}) : super(key: key);
+  MyHttpTest({Key? key}) : super(key: key);
 
   @override
   State<MyHttpTest> createState() => _MyHttpTestState();
@@ -19,11 +44,26 @@ class _MyHttpTestState extends State<MyHttpTest> {
     return CommonModel.fromJson(result);
   }
 
+  final comp = Completer<CommonModel>();
+
+  final fun = Fun();
+
+  @override
+  void initState() {
+    super.initState();
+
+    fun.fun1(1);
+
+    Timer(const Duration(seconds: 2), () {
+      // comp.complete()
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     // 第二种方式
     return FutureBuilder<CommonModel>(
-      future: fetchPost(),
+      future: comp.future,
       builder: (BuildContext context, AsyncSnapshot<CommonModel> snapshot) {
         switch (snapshot.connectionState) {
           case ConnectionState.none:
