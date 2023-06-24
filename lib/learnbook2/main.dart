@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:my_flutter/learnbook2/notification.dart';
+import 'package:my_flutter/learnbook2/nav2.dart';
 
 void main() {
   runApp(const MyApp());
@@ -13,8 +13,11 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       home: Scaffold(
         appBar: AppBar(),
-        body: MyNotificationWidget(),
+        body: MyNav2(),
       ),
+      // routes: ,
+      // onGenerateRoute: ,
+      // onUnknownRoute: ,
     );
   }
 }

@@ -193,7 +193,7 @@ WillPopScope 返回键拦截
     GestureRecognizer：
 
 解决手势冲突：2个方法：
-    1、使用 Listener。这相当于跳出了手势识别那套规则。
+    1、使用 Listener。这相当于跳出了手势识别那套规则。 // 实时跟踪当前光标位置
     2、自定义手势手势识别器（ Recognizer）。
 
 Flutter事件机制：
