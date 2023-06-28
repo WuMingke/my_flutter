@@ -46,6 +46,15 @@ Flutter 路由查找顺序
 
 PageRouteBuilder 组件 自定义路由，可构建转场动画
 
+SliverToBoxAdapter 将 “Box约束” 转换成 “Sliver约束”：它将RenderBox布局协议转换成Sliver协议，
+布局时，它首先将父级约束SliverConstraints转换成BoxConstraints，布局完成之后再将子组件最终确定的Size
+转换成SliverGeometry并汇报给父组件
 
 
+SliverFillViewport 组件。在List里面的“ViewPager”
 
+
+Sliver主要解决2大问题：1多样式列表 2复杂的导航行为
+
+SliverAppBar
+FlexibleSpaceBar

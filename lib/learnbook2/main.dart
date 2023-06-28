@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:my_flutter/learnbook2/nav2.dart';
+import 'package:my_flutter/learnbook2/my_sliver_fill_viewport.dart';
 
 void main() {
   runApp(const MyApp());
@@ -13,7 +13,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       home: Scaffold(
         appBar: AppBar(),
-        body: MyNav2(),
+        body: MySliverFillViewport(),
       ),
       // routes: ,
       // onGenerateRoute: ,

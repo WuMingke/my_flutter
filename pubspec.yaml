@@ -39,7 +39,7 @@ dependencies:
   cupertino_icons: ^1.0.2
   flutter_redux: ^0.10.0
   image_picker: ^0.8.6+1
-  flutter_swiper: ^1.1.6
+#  flutter_swiper: ^1.1.6
   http: ^0.13.5
   shared_preferences: ^2.0.17
   flutter_webview_plugin: ^0.4.0
