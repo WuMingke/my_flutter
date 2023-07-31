@@ -33,9 +33,6 @@
         1、最后得到直接胜利的控件
         2、活到最后的控件中排在列表第一位的控件
 
-    // TODO: 2022/12/6 mingKE 私有属性？？？
-
-
 状态管理
     1、State + InheritedWidget：通过State保存数据和管理状态，通过InheritedWidget实现数据共享
         State支持跨帧保存信息，所以Widget可以实现跨帧的状态恢复。当执行setState方式时，Sate内部会通过调用markNeedsBuild方法，

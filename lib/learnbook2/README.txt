@@ -12,6 +12,11 @@ Flutter引擎完成布局只需以“深度优先”的顺序遍历一次组件�
 
 
 FractionallySizedBox 可以将父级约束乘以一个倍数之后再传递给子组件 =》 可以用来打破父级约束
+打破约束的方式还有：
+    UnconstrainedBox
+    OverflowBox
+    SizedOverflowBox
+
 
 IgnorePointer 禁用点击响应
 
@@ -58,3 +63,8 @@ Sliver主要解决2大问题：1多样式列表 2复杂的导航行为
 
 SliverAppBar
 FlexibleSpaceBar
+
+IndexedStack    实现多个子组件之间切换的容器
+RepaintBoundary    为子组件单独创建图层=》1截图  2消耗资源的组件，用其包裹，提升性能
+
+

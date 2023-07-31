@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_swiper/flutter_swiper.dart';
 import 'package:my_flutter/learnimooc/app/dao/home_dao.dart';
 import 'package:my_flutter/learnimooc/app/model/common_model.dart';
 import 'package:my_flutter/learnimooc/app/model/grid_nav_model.dart';
@@ -70,28 +69,21 @@ class _HomePageState extends State<HomePage> with AutomaticKeepAliveClientMixin 
                       children: [
                         SizedBox(
                           height: 200,
-                          child: Swiper(
-                            itemCount: bannerList.length,
-                            autoplay: true,
-                            pagination: const SwiperPagination(),
-                            itemBuilder: (BuildContext context, int index) {
-                              return GestureDetector(
-                                onTap: () {
-                                  Navigator.push(context, MaterialPageRoute(builder: (context) {
-                                    return WebView(
-                                      url: bannerList[index].url,
-                                      statusBarColor: bannerList[index].statusBarColor,
-                                      title: bannerList[index].title,
-                                      hideAppBar: bannerList[index].hideAppBar,
-                                    );
-                                  }));
-                                },
-                                child: Image.network(
-                                  bannerList.isEmpty ? "" : bannerList[index].icon,
-                                  fit: BoxFit.fill,
-                                ),
-                              );
+                          child: GestureDetector(
+                            onTap: () {
+                              Navigator.push(context, MaterialPageRoute(builder: (context) {
+                                return WebView(
+                                  url: bannerList[0].url,
+                                  statusBarColor: bannerList[0].statusBarColor,
+                                  title: bannerList[0].title,
+                                  hideAppBar: bannerList[0].hideAppBar,
+                                );
+                              }));
                             },
+                            child: Image.network(
+                              bannerList.isEmpty ? "" : bannerList[0].icon,
+                              fit: BoxFit.fill,
+                            ),
                           ),
                         ),
                         Padding(
@@ -129,7 +121,7 @@ class _HomePageState extends State<HomePage> with AutomaticKeepAliveClientMixin 
                       padding: const EdgeInsets.only(top: 24),
                       height: 80,
                       decoration: BoxDecoration(color: Color.fromARGB((_appbarAlpha * 255).toInt(), 255, 255, 255)),
-                      child: SearchBar(
+                      child: MySearchBar(
                         enabled: true,
                         hideLeft: false,
                         searchBarType: _appbarAlpha > 0.2 ? SearchBarType.homeLight : SearchBarType.home,

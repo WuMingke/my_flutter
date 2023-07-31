@@ -49,7 +49,7 @@ class _SearchPageState extends State<SearchPage> {
   Widget _appBar() {
     return Column(
       children: [
-        SearchBar(
+        MySearchBar(
           enabled: true,
           hideLeft: widget.hideLeft ?? true,
           searchBarType: SearchBarType.normal,

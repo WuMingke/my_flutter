@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 
 enum SearchBarType { home, normal, homeLight }
 
-class SearchBar extends StatefulWidget {
-  const SearchBar(
+class MySearchBar extends StatefulWidget {
+  const MySearchBar(
       {Key? key,
       required this.enabled,
       required this.hideLeft,
@@ -29,10 +29,10 @@ class SearchBar extends StatefulWidget {
   final ValueChanged<String>? onChanged;
 
   @override
-  State<SearchBar> createState() => _SearchBarState();
+  State<MySearchBar> createState() => _SearchBarState();
 }
 
-class _SearchBarState extends State<SearchBar> {
+class _SearchBarState extends State<MySearchBar> {
   bool showClear = false;
   final TextEditingController _controller = TextEditingController();
 

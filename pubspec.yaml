@@ -42,10 +42,11 @@ dependencies:
 #  flutter_swiper: ^1.1.6
   http: ^0.13.5
   shared_preferences: ^2.0.17
-  flutter_webview_plugin: ^0.4.0
+#  flutter_webview_plugin: ^0.4.0
   flutter_splash_screen: ^1.0.0+6
   dio: ^4.0.6
   flutter_bloc: ^8.1.2
+  equatable: ^2.0.5
 
 dev_dependencies:
   flutter_test:

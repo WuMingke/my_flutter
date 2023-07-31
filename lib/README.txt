@@ -173,7 +173,7 @@ WillPopScope 返回键拦截
 状态管理的一般原则是：
 如果状态是组件私有的，则应该由组件自己管理；如果状态要跨组件共享，则该状态应该由各个组件共同的父元素来管理。
 
-按需rebuild：ValueListenableBuilder
+按需rebuild：ValueListenableBuilder，实现局部刷新
     组件和数据流向无关，可以实现任意流向的数据共享。
     实践中，ValueListenableBuilder 的拆分粒度应该尽可能细，可以提高性能。
 

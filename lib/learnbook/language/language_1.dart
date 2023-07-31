@@ -1,3 +1,5 @@
+import 'dart:isolate';
+
 import 'package:my_flutter/learnbook/language/aa.dart';
 
 void main() {
@@ -62,6 +64,7 @@ class B extends Base {
 
     var m = ModelA("", "");
     m.id;
+
   }
 }
 
@@ -114,13 +117,13 @@ class ModelA {
 class Logger {
   static Logger? _cache;
 
-  // TODO: 2023/1/22 mingKE Dart线程安全？？？
+  // Dart线程安全
   factory Logger() {
     _cache ??= Logger._internal();
     return _cache!;
   }
 
-  Logger._internal(); // 私有的匿名构造
+  Logger._internal(); // 私有的命名构造
 
 /**
  * 在使用的时候

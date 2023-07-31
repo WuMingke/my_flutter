@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-
-import 'learncanvas/canvas2.dart';
-import 'learnwidget/gesture_widget.dart';
+import 'package:my_flutter/learnwidget/bottom_drag_widget.dart';
 
 void main() {
   // runApp(const LearnWidget());
@@ -10,7 +8,7 @@ void main() {
   //     [DeviceOrientation.landscapeLeft, DeviceOrientation.landscapeRight]);
   // SystemChrome.setEnabledSystemUIOverlays([]); // 全屏显示
   // runApp(const LearnCanvas());
-  runApp(const LearnCanvas2());
+  runApp(const LearnWidget());
   // runApp(const CurveBox());
   // runApp(const CurveBox());
 }
@@ -80,7 +78,8 @@ class _MyHomePageState extends State<MyHomePage> {
       // body: const TestDialog(),
       // body: const TestGesture(),
       // body: const TestGesture2(),
-      body: const Drag(),
+      // body: const Drag(),
+      body: const BottomDragWidget(),
     );
   }
 }
