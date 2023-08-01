@@ -1,5 +1,3 @@
-import 'dart:isolate';
-
 import 'package:my_flutter/learnbook/language/aa.dart';
 
 void main() {
@@ -8,7 +6,7 @@ void main() {
   // g.b();
   // g.c();
 
-  var ab = AB("1");
+  var ab = AB();
   // ab._name; 私有属性跨文件才有效
 }
 
@@ -64,7 +62,6 @@ class B extends Base {
 
     var m = ModelA("", "");
     m.id;
-
   }
 }
 

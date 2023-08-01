@@ -79,7 +79,7 @@ class D {
 }
 
 void excep() {
-  throw NullThrownError();
+  // throw NullThrownError();
 }
 
 void foo() {}
