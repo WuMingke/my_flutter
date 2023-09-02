@@ -45,7 +45,7 @@ class _MyAppState extends State<MyApp> {
       return MaterialApp(
         home: widget,
       );
-    });
+    }, future: null,);
   }
 }
 

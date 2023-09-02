@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:my_flutter/learnwidget/bottom_drag_widget.dart';
+import 'package:my_flutter/page_view/my_page_view.dart';
 
 void main() {
   // runApp(const LearnWidget());
@@ -79,7 +80,7 @@ class _MyHomePageState extends State<MyHomePage> {
       // body: const TestGesture(),
       // body: const TestGesture2(),
       // body: const Drag(),
-      body: const BottomDragWidget(),
+      body: const MyPageViewTest(),
     );
   }
 }
